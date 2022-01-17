@@ -1,0 +1,136 @@
+﻿@using wholesale.Models;
+
+@{
+    Layout = "../Shared/GeneralLayout.cshtml";
+
+    string username = ViewBag.username; ViewBag.usernameGL = username;
+
+    int countInCart = ViewBag.countInCart; ViewBag.countInCartGL = countInCart;
+    int countInWish = ViewBag.countInWish; ViewBag.countInWishGL = countInWish;
+
+    int user_id = ViewBag.user_id; ViewBag.user_idGL = user_id;
+    
+    var product = ViewBag.Products;
+  
+
+    int newcount = 1000;
+    var allProducts = ViewBag.allProducts;
+}
+
+
+    <!--================ End Header Menu Area =================-->
+    <!-- ================ start banner area ================= -->
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Wish List</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                
+                                <th scope="col">Wish</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Wishlist s in product)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            @foreach (Product item in allProducts)
+                                            {
+                                                if (item.Id == s.ProductId)
+                                                {
+                                                    <div class="d-flex">
+                                                        <img style="max-height:50px; max-width:50px" src="../../Content/img/product/@(item.Prod_name).png" alt="">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p>
+                                                            <a href="~/Product/SingleProduct?product_id=@s.ProductId&user_id=@user_id">  @item.Prod_name</a>
+                                                        </p>
+                                                    </div>
+                                                }
+                                            }
+                                                </div>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @foreach (Product item in allProducts)
+                                            {
+                                                if (item.Id == s.ProductId)
+                                                {
+                                                    @item.Price
+                                                }
+                                            }
+                                            $
+                                        </h5>
+                                    </td>
+                                    @*<td>
+                                            <div class="product_count">
+                                                <input type="text" name="qty" id="sst" maxlength="12" value="@s.Count" title="Quantity:"
+                                                       class="input-text qty">
+                                                <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                                        class="increase items-count" type="button">
+                                                    <i class="lnr lnr-chevron-up"></i>
+                                                </button>
+                                                <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                                        class="reduced items-count" type="button">
+                                                    <i class="lnr lnr-chevron-down"></i>
+                                                </button>
+                                            </div>
+                                        </td>*@
+                                    
+
+
+                                     
+                                  
+
+                                <td>
+                                    @*<a class="button" href="~/Product/DelSaveWish?user_id=@user_id&prod_id=@s.Id">Delete</a>*@
+                                    <li><button style="color:red"><a style="color:red" href="~/Product/DelSaveWish?user_id=@user_id&prod_id=@s.Id" class="ti-heart"></a></button></li>
+
+                                </td>
+
+                                </tr>
+
+                            }
+
+                       
+                            <tr class="out_button_area">
+                                <td class="d-none-l">
+                                </td>
+                                <td class="">
+                                </td>
+                                <td>
+                                </td>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+    <!--================ Start footer Area  =================-->
+   

@@ -1,0 +1,237 @@
+﻿@using wholesale.Models;
+
+@{
+    Layout = "../Shared/GeneralLayout.cshtml";
+
+    string username = ViewBag.username; ViewBag.usernameGL = username;
+
+     ViewBag.countInCartGL = 0;
+    int countInWish = ViewBag.countInWish; ViewBag.countInWishGL = countInWish;
+
+    int user_id = ViewBag.user_id; ViewBag.user_idGL = user_id;
+    
+    Order orders = ViewBag.orders;
+    var shopcards = ViewBag.shopcards;
+    var products = ViewBag.products;
+
+    int subtotal = 0;
+
+    string status = "null";
+
+
+}
+    <!--================ End Header Menu Area =================-->
+    <!-- ================ start banner area ================= -->
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Order Confirmation</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+    <!--================Order Details Area =================-->
+    <section class="order_details section-margin--small">
+      
+        <div class="container">
+            <p class="text-center billing-alert">Thank you. Your order has been received.</p>
+            <div class="row mb-5">
+                <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+                    <div class="confirmation-card">
+                        <h3 class="billing-title">Order Info</h3>
+                        <table class="order-rable">
+                            <tr>
+                                <td>Order number</td>
+                                <td>: @orders.Id</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>: @orders.Date</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>
+                                    : USD
+                                    @* @{
+                                    foreach (ShopCartForOrder item2 in shopdards)
+                                    {
+                                        foreach (Product item in products)
+                                        {
+                                            if (item2.ProductId == item.Id)
+                                            {
+                                                @(item2.Count * item.Price)
+                                            }
+                                        }
+                                    }
+                                }*@
+                                    @orders.Sum
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Payment method</td>
+                                <td>: Check payments</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+                    <div class="confirmation-card">
+                        <h3 class="billing-title">Billing Address</h3>
+                        <table class="order-rable">
+                            <tr>
+                                <td>Cart No</td>
+                                <td>: @orders.Cartno</td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td>: @orders.Telno</td>
+                            </tr>
+                            <tr>
+                                <td>Bank</td>
+                                <td>: @orders.Bank</td>
+                            </tr>
+                            <tr>
+                                <td>Postcode</td>
+                                <td>: 1205</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+                    <div class="confirmation-card">
+                        <h3 class="billing-title">Shipping Address</h3>
+                        <table class="order-rable">
+                            <tr>
+                                <td>Street</td>
+                                <td>: @orders.Add1</td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>: @orders.City</td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>: @orders.Country</td>
+                            </tr>
+                            <tr>
+                                <td>Company</td>
+                                <td>: @orders.Company</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="order_details_table">
+                <h2>Order Details</h2>
+                <div class="table-responsive">
+
+
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ShopCard s in shopcards)
+                            {
+                                foreach (Product item in products)
+                                {
+                                    if (item.Id == s.ProductId)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p>@item.Prod_name</p>
+                                            </td>
+                                            <td>
+                                                <h5>x @s.Count</h5>
+                                            </td>
+                                            <td>
+                                                <p>$@(s.Count * item.Price)</p>
+
+                                            </td>
+                                        </tr>
+                                        subtotal += s.Count * item.Price;
+                                    }
+                                }
+                            }
+
+                            <tr>
+                                <td>
+                                    <h4>Subtotal</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>$@subtotal</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Shipping</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Flat rate: $10.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Total</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <h4>$@(subtotal+10)</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Status</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <h4>@{ 
+                                        if(orders.Status == true)
+                                        {
+                                           <h5 style="color:green">Confirmed</h5>
+                                        }
+                                        else
+                                        {
+                                           <h5 style="color:red">Not confirmed</h5>
+                                        }
+                                    } 
+                                    </h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <a class="button" style="align-content:center" href="~/Product/DeleteCart?user_id=@user_id">Got it!</a>
+        </div>
+        
+    </section>
+    <!--================End Order Details Area =================-->
+    <!--================ Start footer Area  =================-->
+  

@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aroma Shop - Category</title>
+    <link rel="icon" href="../../Content/img/Fevicon.png" type="image/png">
+    <link rel="stylesheet" href="../../Content/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Content/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../../Content/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../../Content/vendors/linericon/style.css">
+    <link rel="stylesheet" href="../../Content/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../Content/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../Content/vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="../../Content/vendors/nouislider/nouislider.min.css">
+
+    <link rel="stylesheet" href="../../Content/css/style.css">
+</head>
+<body>
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                            <li class="nav-item"><a class="nav-link" href="~/Orders/Index">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/ProductsAdmin/Index">Products</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="~/Companies/Index">Companies</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="~/Categories/Index">Categories</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="~/News/Index">News</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Login/Index">Quit</a></li>
+
+                           
+                        </ul>
+
+                       
+                      
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Admin Page / @ViewBag.page</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Manage</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @RenderBody()
+

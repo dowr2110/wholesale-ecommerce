@@ -1,0 +1,344 @@
+﻿@using wholesale.Controllers;
+@using wholesale.Models;
+@{
+    Layout = "../Shared/GeneralLayout.cshtml";
+
+    var product = ViewBag.Products;
+    var categories = ViewBag.categories;
+    string username = ViewBag.username; ViewBag.usernameGL = username;/////////////////////
+
+    int countInCart = ViewBag.countInCart; ViewBag.countInCartGL = countInCart; /////////////
+    int countInWish = ViewBag.countInWish; ViewBag.countInWishGL = countInWish;//////////////////
+
+    int user_id = ViewBag.user_id; ViewBag.user_idGL = user_id;//////////////////////
+
+    string sss = "heyyo";
+    var tehnikcatregory = ViewBag.tehnikcatregory;
+    var clothescatregory = ViewBag.clothescatregory;
+    var fruitscatregory = ViewBag.fruitscatregory;
+    var productCount = ViewBag.productCount;
+
+    var topproducts = ViewBag.topproducts;
+    var wishlists = ViewBag.wishlists;
+
+}
+
+    <!--================ End Header Menu Area =================-->
+    <!-- ================ start banner area ================= -->
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Shop Category</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+    <!-- ================ category section start ================= -->
+    <section class="section-margin--small mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-5">
+                    <div class="sidebar-categories">
+                        <div class="head">Categories</div>
+                        <ul class="main-categories">
+                            <li class="common-filter">
+                                <form action="#">
+                                    <ul>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="all" name="brand" onchange="filterA()"><label for="men">All<span> (@productCount)</span></label></li>
+
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="Technic" name="brand" onchange="filterT()"><label for="men">Technic<span> (@tehnikcatregory)</span></label></li>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="Clothes" name="brand" onchange="filterC()"><label for="women">Clothes<span> (@clothescatregory)</span></label></li>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="Fructs" name="brand" onchange="filterF()"><label for="accessories">Fructs<span> (@fruitscatregory)</span></label></li>
+
+                                    </ul>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-filter">
+                        <div class="top-filter-head">Product Filters</div>
+                        <div class="common-filter">
+                            <div class="head">Brands</div>
+                            <form action="#">
+                                <ul>
+                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">Apple<span>(29)</span></label></li>
+                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="evroopt" name="brand"><label for="asus">Evroopt<span>(29)</span></label></li>
+                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="zara" name="brand"><label for="gionee">ZARA<span>(19)</span></label></li>
+
+                                </ul>
+                            </form>
+                        </div>
+                        @*  <div class="common-filter">
+                                <div class="head">Color</div>
+                                <form action="#">
+                                    <ul>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
+                                        <li class="filter-list">
+                                            <input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">
+                                                Black
+                                                Leather<span>(29)</span>
+                                            </label>
+                                        </li>
+                                        <li class="filter-list">
+                                            <input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">
+                                                Black
+                                                with red<span>(19)</span>
+                                            </label>
+                                        </li>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+                                    </ul>
+                                </form>
+                            </div>*@
+                        @*<div class="common-filter">
+                                <div class="head">Price</div>
+                                <div class="price-range-area">
+                                    <div id="price-range"></div>
+                                    <div class="value-wrapper d-flex">
+                                        <div class="price">Price:</div>
+                                        <span>$</span>
+                                        <div id="lower-value"></div>
+                                        <div class="to">to</div>
+                                        <span>$</span>
+                                        <div id="upper-value"></div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8 col-md-7">
+                    <!-- Start Filter Bar -->
+                    <div class="filter-bar d-flex flex-wrap align-items-center">
+                        @*<div class="sorting">
+                                <select>
+                                    <option value="1">Default sorting</option>
+                                    <option value="1">Default sorting</option>
+                                    <option value="1">Default sorting</option>
+                                </select>
+                            </div>
+                            <div class="sorting mr-auto">
+                                <select>
+                                    <option value="1">Show 12</option>
+                                    <option value="1">Show 12</option>
+                                    <option value="1">Show 12</option>
+                                </select>
+                            </div>*@
+                        <div>
+                            <div class="input-group filter-bar-search">
+                                <input type="text" placeholder="Search" id="myInput" onkeyup="filterFunction()">
+                                <input type="text" placeholder="Search" value="Technic" style="display:none" id="myInput1">
+                                <input type="text" placeholder="Search" value="Clothes" style="display:none" id="myInput2">
+                                <input type="text" placeholder="Search" value="Fructs" style="display:none" id="myInput3">
+                                <div class="input-group-append">
+                                    <button type="button"><i class="ti-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Filter Bar -->
+                    <!-- Start Best Seller -->
+                    <section class="lattest-product-area pb-40 category-list">
+                        <div class="row" id="myDropdown">
+
+                            @foreach (Product s in product)
+                            {
+                                <div class="col-md-6 col-lg-4" id="mydiv">
+                                    <div class="card text-center card-product">
+                                        <div class="card-product__img">
+                                            <img class="card-img" style="max-height:210px" src="../../Content/img/product/@(s.Prod_name).png" alt="">
+                                            <ul class="card-product__imgOverlay">
+                                                @*  <li><button><i class="ti-search"></i></button></li>*@
+                                                <li><button><a href="~/Product/AddToCard2?product_id2=@s.Id&count=1&user_id=@user_id" class="ti-shopping-cart"></a></button></li>
+
+                                                @{
+                                                    int flag = 0;
+                                                    foreach (Wishlist iii in wishlists)
+                                                    {
+
+                                                        if (iii.ProductId == s.Id && iii.UserId == user_id)
+                                                        {
+                                                            flag++;
+                                                        }
+
+                                                    }
+                                                    if (flag > 0)
+                                                    {
+                                                        <li><button style="color:red"><a style="color:red" href="~/Product/AddToWishList?product_id2=@s.Id&count=1&user_id=@user_id" class="ti-heart"></a></button></li>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><button><a href="~/Product/AddToWishList?product_id2=@s.Id&count=1&user_id=@user_id" class="ti-heart"></a></button></li>
+
+                                                    }
+
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>
+                                                @{
+                                                    foreach (Category item in categories)
+                                                    {
+                                                        if (s.CategoryId == item.Id)
+                                                        {
+                                                            @item.Category_name;
+                                                        }
+                                                    }
+                                            }
+                                        </p>
+                                        <h4 class="card-product__title"><a href="~/Product/SingleProduct?product_id=@s.Id&user_id=@user_id">@s.Prod_name</a></h4>
+                                        <h5 class="card-product__price">@s.Price$</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    </section>
+                    <!-- End Best Seller -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function filterFunction() {
+            var input, filter, ul, li, a, i, mydiv;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("myDropdown");
+            mydiv = div.getElementsByClassName("col-md-6 col-lg-4");
+            a = div.getElementsByTagName("h4");
+
+            for (i = 0; i < a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                    mydiv[i].style.display = "";
+
+                } else {
+                    a[i].style.display = "none";
+                    mydiv[i].style.display = "none";
+
+                }
+            }
+        }
+
+        function filterT() {
+            if (document.getElementById("Technic").checked) {
+                var input, filter, ul, li, a, i, mydiv;
+                input = document.getElementById("myInput1");
+                filter = input.value.toUpperCase();
+
+                div = document.getElementById("myDropdown");
+                mydiv = div.getElementsByClassName("col-md-6 col-lg-4");
+                a = div.getElementsByTagName("p");
+
+                for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                        mydiv[i].style.display = "";
+
+                    } else {
+                        a[i].style.display = "none";
+                        mydiv[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function filterC() {
+            if (document.getElementById("Clothes").checked) {
+                var input, filter, ul, li, a, i, mydiv;
+                input = document.getElementById("myInput2");
+                filter = input.value.toUpperCase();
+
+                div = document.getElementById("myDropdown");
+                mydiv = div.getElementsByClassName("col-md-6 col-lg-4");
+                a = div.getElementsByTagName("p");
+
+                for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                        mydiv[i].style.display = "";
+
+                    } else {
+                        a[i].style.display = "none";
+                        mydiv[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function filterF() {
+            if (document.getElementById("Fructs").checked) {
+                var input, filter, ul, li, a, i, mydiv;
+                input = document.getElementById("myInput3");
+                filter = input.value.toUpperCase();
+
+                div = document.getElementById("myDropdown");
+                mydiv = div.getElementsByClassName("col-md-6 col-lg-4");
+                a = div.getElementsByTagName("p");
+
+                for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                        mydiv[i].style.display = "";
+
+                    }
+                    else {
+                        a[i].style.display = "none";
+                        mydiv[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function filterA() {
+            if (document.getElementById("all").checked) {
+                var input, filter, ul, li, a, i, mydiv;
+                input = document.getElementById("myInput3");
+                filter = input.value.toUpperCase();
+
+                div = document.getElementById("myDropdown");
+                mydiv = div.getElementsByClassName("col-md-6 col-lg-4");
+                a = div.getElementsByTagName("p");
+
+                for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                        mydiv[i].style.display = "";
+
+                    }
+                    else {
+                        a[i].style.display = "";
+                        mydiv[i].style.display = "";
+                    }
+                }
+            }
+        }
+
+
+    </script>
+    <!-- ================ category section end ================= -->
+    <!-- ================ top product area start ================= -->
+   
+    <!-- ================ top product area end ================= -->
+  
+   
+

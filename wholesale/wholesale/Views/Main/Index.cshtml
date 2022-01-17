@@ -1,0 +1,135 @@
+﻿@using wholesale.Models;
+
+@{
+    Layout = "../Shared/GeneralLayout.cshtml";
+
+    string username = ViewBag.username; ViewBag.usernameGL = username;
+
+    int countInCart = ViewBag.countInCart; ViewBag.countInCartGL = countInCart;
+    int countInWish = ViewBag.countInWish; ViewBag.countInWishGL = countInWish;
+
+    int user_id = ViewBag.user_id; ViewBag.user_idGL = user_id;
+
+    var topproducts = ViewBag.topproducts;
+    var products = ViewBag.Products;
+    var category = ViewBag.category;
+
+    string categoryname = "null";
+
+    var outternews = ViewBag.outternews;
+}
+
+<!--================ End Header Menu Area =================-->
+
+<main class="site-main">
+
+    <!--================ Hero banner start =================-->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="row no-gutters align-items-center pt-60px">
+                <div class="col-5 d-none d-sm-block">
+                    <div class="hero-banner__img">
+                        <img class="img-fluid" src="../../Content/img/home/hero-banner.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+                    <div class="hero-banner__content">
+                        <h4>Shop is fun</h4>
+                        <h1>Gifts Our Premium Product</h1>
+                        <p>Any client is important to us. our task is to make every customer happy. For us, every wish of the buyer is a law. We love and appreciate every customer.</p>
+                        <a class="button button-hero" href="~/Product/Index?id=@user_id">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ Hero banner start =================-->
+    <!--================ Hero Carousel start =================-->
+   @* <section class="section-margin mt-0">
+        <div class="owl-carousel owl-theme hero-carousel">
+            @foreach (TopProduct item in topproducts)
+            {
+
+                foreach (Product ss in products)
+                {
+                    if (item.Id == ss.Id)
+                    {
+                <div class="hero-carousel__slide">
+                    <img src="../../Content/img/product/@(ss.Prod_name).png" style="max-height:300px" alt="" class="img-fluid">
+                    <a href="~/Product/SingleProduct?product_id=@ss.Id&user_id=@user_id" class="hero-carousel__slideOverlay">
+                        <h3>@ss.Prod_name</h3>
+                        <p>
+                            @foreach (Category cc in category)
+                            {
+                                if (cc.Id == ss.CategoryId)
+                                {
+                                    categoryname = cc.Category_name;
+
+                                }
+                            }
+                            @categoryname
+                        </p>
+                    </a>
+                </div>
+                    }
+                }
+            }
+        </div>
+    </section>*@
+
+
+
+    <!--================ Hero Carousel end =================-->
+    <!-- ================ trending product section start ================= -->
+    <!-- ================ trending product section end ================= -->
+    <!-- ================ offer section start ================= -->
+  
+    <!-- ================ offer section end ================= -->
+    <!-- ================ Best Selling item  carousel ================= -->
+  
+    <!-- ================ Best Selling item  carousel end ================= -->
+    <!-- ================ Blog section start ================= -->
+    <section class="blog">
+        <div class="container">
+            <div class="section-intro pb-60px">
+                <p>Popular Item in the market</p>
+                <h2>Latest <span class="section-intro__style">News</span></h2>
+            </div>
+
+            <div class="row">
+                @foreach (News item in outternews)
+                {
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                    <div class="card card-blog">
+                        <div class="card-blog__img">
+                            <img class="card-img rounded-0" src="../../Content/img/product/@(item.Image).png" alt="">
+                        </div>
+                        <div class="card-body">
+                            <ul class="card-blog__info">
+                                <li><a href="#">By Admin</a></li>
+                               
+                            </ul>
+                            <h4 class="card-blog__title"><a href="single-blog.html">@item.Title</a></h4>
+                            <p>@item.Body</p>
+                           
+                        </div>
+                    </div>
+                </div>
+                }
+
+
+
+
+            </div>
+        </div>
+    </section>
+    <!-- ================ Blog section end ================= -->
+    <!-- ================ Subscribe section start ================= -->
+    <!-- ================ Subscribe section end ================= -->
+
+
+
+</main>
+
+
+<!--================ Start footer Area  =================-->

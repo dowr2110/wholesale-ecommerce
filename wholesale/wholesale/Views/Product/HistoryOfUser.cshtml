@@ -1,0 +1,141 @@
+﻿
+ 
+@using wholesale.Models;
+
+@{
+    Layout = "../Shared/GeneralLayout.cshtml";
+
+    string username = ViewBag.username; ViewBag.usernameGL = username;
+
+    int countInCart = ViewBag.countInCart; ViewBag.countInCartGL = countInCart;
+    int countInWish = ViewBag.countInWish; ViewBag.countInWishGL = countInWish;
+
+    int user_id = ViewBag.user_id; ViewBag.user_idGL = user_id;
+
+    var orders = ViewBag.orders;
+    var shopcards2 = ViewBag.shopcards2;
+    var products = ViewBag.products;
+
+    int subtotal = 0;
+
+    string status = "null";
+}
+    <!--================ End Header Menu Area =================-->
+    <!-- ================ start banner area ================= -->
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Order History</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+    <!--================Order Details Area =================-->
+    <section class="order_details section-margin--small">
+
+        <div class="container">
+            @* <p class="text-center billing-alert">Thank you. Your order has been received.</p>*@
+            @foreach (Order item in orders)
+            { 
+
+            <div class="container" style="background-color:brown">
+                <div class="row mb-5">
+                    <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+                        <div class="confirmation-card">
+                            <h3 class="billing-title">Order Info</h3>
+                            <table class="order-rable">
+                                <tr>
+                                    <td>Order number</td>
+                                    <td>: @item.Id</td>
+                                </tr>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>: @item.Date</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>: USD @item.Sum</td>
+                                </tr>
+                                <tr>
+                                    <td >Status</td>
+                                    <td> @{
+                                            if (item.Status == true)
+                                            {
+                                              <h5 style="color:green">: Confirmed</h5>
+                                            }
+                                            else
+                                            {
+                                                <h5 style="color:red">: Not confirmed</h5>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+                        <div class="confirmation-card">
+                            <h3 class="billing-title">Billing Address</h3>
+                            <table class="order-rable">
+                                <tr>
+                                    <td>Cart No</td>
+                                    <td>:@item.Cartno</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>: @item.Telno</td>
+                                </tr>
+                                <tr>
+                                    <td>Bank</td>
+                                    <td>: @item.Bank</td>
+                                </tr>
+                                
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+                        <div class="confirmation-card">
+                            <h3 class="billing-title">Shipping Address</h3>
+                            <table class="order-rable">
+                                <tr>
+                                    <td>Street</td>
+                                    <td>: @item.Add1</td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>: @item.City</td>
+                                </tr>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>: @item.Country</td>
+                                </tr>
+                                <tr>
+                                    <td>Company</td>
+                                    <td>: @item.Company</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+           
+
+                
+            </div>
+                                                }
+        </div>
+</section>
+<!--================End Order Details Area =================-->
+<!--================ Start footer Area  =================-->
+
+
+
+
+

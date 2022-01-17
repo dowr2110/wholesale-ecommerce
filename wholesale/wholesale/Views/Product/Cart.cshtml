@@ -1,0 +1,155 @@
+﻿@using wholesale.Models;
+
+@{
+    Layout = "../Shared/GeneralLayout.cshtml";
+    var product = ViewBag.Products;
+
+
+    int newcount = 1000;
+    var allProducts = ViewBag.allProducts;
+
+    string username = ViewBag.username; ViewBag.usernameGL = username;
+
+    int countInCart = ViewBag.countInCart; ViewBag.countInCartGL = countInCart;
+    int countInWish = ViewBag.countInWish; ViewBag.countInWishGL = countInWish;
+
+    int user_id = ViewBag.user_id; ViewBag.user_idGL = user_id;
+}
+ 
+
+    <!--================ End Header Menu Area =================-->
+    <!-- ================ start banner area ================= -->
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Shopping Cart</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ShopCard s in product)
+                            {
+
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        @foreach (Product item in allProducts)
+                                        {
+                                            if (item.Id == s.ProductId)
+                                            {
+                                                <div class="d-flex">
+                                                    <img style="max-height:50px; max-width:50px" src="../../Content/img/product/@(item.Prod_name).png" alt="">
+                                                </div>
+                                                <div class="media-body">
+                                                    <p>
+
+                                                        @item.Prod_name
+                                                     
+                                                    </p>
+                                                </div>
+                                            }
+                                        }
+                                            </div>
+                                </td>
+                                <td>
+                                    <h5>
+                                        @foreach (Product item in allProducts)
+                                        {
+                                            if (item.Id == s.ProductId)
+                                            {
+                                                @item.Price
+                                            }
+                                        }
+                                        $
+                                    </h5>
+                                </td>
+                               
+                            <form method="post" action="~/Product/UpdSave?user_id=@user_id&shopcardid=@s.Id">
+                                <td>
+                                    <div class="product_count">
+                                        <input type="text" name="count" id="@s.Id" maxlength="12" value="@s.Count" title="Quantity:"
+                                               class="input-text qty">
+                                        <button onclick="var result = document.getElementById('@s.Id'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                                class="increase items-count" type="button">
+                                            <i class="lnr lnr-chevron-up"></i>
+                                        </button>
+                                        <button onclick="var result = document.getElementById('@s.Id'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                                class="reduced items-count" type="button">
+                                            <i class="lnr lnr-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>
+                                        @foreach (Product item in allProducts)
+                                        {
+                                            if (item.Id == s.ProductId)
+                                            {
+                                                @(s.Count * item.Price)
+                                            }
+                                        }
+                                        $
+                                    </h5>
+                                </td>
+
+
+                                <td>
+                                    <input type="submit" class="button" value="Update" />
+                                </td>
+                            </form>
+                               
+                                <td>
+                                    <a class="button" href="~/Product/DelSave?user_id=@user_id&prod_id=@s.Id">Delete</a>
+                                </td>
+
+                            </tr>
+                                    
+                            }
+
+  
+                        <tr class="out_button_area">
+                            <td class="d-none-l">
+                            </td>
+                            <td class="">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="gray_btn" href="~/Product/Index?id=@user_id">Continue Shopping</a>
+                                    <a class="primary-btn ml-2" href="~/Product/Checkout?user_id=@user_id">Proceed to checkout</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================End Cart Area =================-->
+        <!--================ Start footer Area  =================-->
+    
